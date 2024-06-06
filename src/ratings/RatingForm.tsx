@@ -10,8 +10,15 @@ interface RatingFormProps {
 }
 
 export function RatingForm({ ratings, selectedRating, setSelectedRating, setIsSubmitted }: RatingFormProps) {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    setIsSubmitted(true);
+  };
   return (
-    <div className='flex flex-col gap-5 justify-center '>
+    <form
+      onSubmit={handleSubmit}
+      className='flex flex-col gap-5 justify-center '
+    >
       <RatingCircle>
         <RatingStar />
       </RatingCircle>
@@ -32,12 +39,13 @@ export function RatingForm({ ratings, selectedRating, setSelectedRating, setIsSu
         ))}
       </ul>
       <button
+        type='submit'
         data-test='rating-submit'
         onClick={() => setIsSubmitted(true)}
         className='bg-rating-orange rounded-3xl p-2 uppercase font-bold sm:hover:bg-white text-[14px] sm:text-[15px] '
       >
         Submit
       </button>
-    </div>
+    </form>
   );
 }

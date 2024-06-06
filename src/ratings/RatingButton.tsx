@@ -18,7 +18,10 @@ export function RatingButton({ rating, selectedRating, setSelectedRating }: Rati
       <button
         data-test={`rating-btn-${rating}`}
         className='w-full h-full'
-        onClick={() => setSelectedRating(rating)}
+        onClick={(e: React.FormEvent) => {
+          e.preventDefault();
+          setSelectedRating(rating);
+        }}
       >
         {rating}
       </button>
